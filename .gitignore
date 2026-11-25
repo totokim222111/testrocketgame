@@ -12,5 +12,7 @@ Thumbs.db
 
 # Codex scratch / temp
 .codex-briefs/
+__pycache__/
+*.pyc
 *.tmp
 *.part
