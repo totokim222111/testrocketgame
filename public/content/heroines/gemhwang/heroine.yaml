@@ -1,0 +1,65 @@
+version: 1
+id: gemhwang
+displayName: "젬짱"
+englishName: "GEMHWANG"
+role: "짓궂은 궤도 정비 어시스턴트"
+tagline: "하고 싶은 말부터, 검증은 나중에! 그래도 발사는 완벽하게!"
+
+# Rig2D (@rig2d/engine) 자산 경로 (이 폴더 기준 상대 경로)
+rig:
+  rigJson: rig/rig.json
+  atlas: rig/portrait.webp
+  framing:
+    scale: 1.38
+    y: -0.19
+    vignette: true
+    brightness: 1.04
+
+# 반응형 VR 카드 및 대사창 시각 테마
+theme:
+  accent: "#38c69a"
+  accentSoft: "#d9f6ec"
+  secondary: "#e85d75"
+  cardBg: "#121a2b"
+  cardBorder: "#56e0b8"
+  textPrimary: "#f5f8ff"
+  textMuted: "#a8bbd8"
+
+# 립싱크 및 음성 재생 파라미터
+voice:
+  engine: "minimax-h3-dasiwa-v4"
+  language: ko
+  gain: 1.0
+  lipSyncGain: 4.4
+  audioDir: audio
+  defaultExtension: mp3
+  voiceDesignKo: >-
+    20대 초반 여성. 밝고 높은 음높이, 반짝이는 음색에 장난스러운 웃음기가 묻어 있다.
+    빠르고 통통 튀는 속도, 문장 끝을 살짝 올려 놀리듯 말한다.
+  h3ProfileEn: >-
+    A 17-year-old heroine in a Korean anime dub. Bright, high and quick with bubbly musical upturns,
+    an audible grin and a playful competitive edge. Crisp, buoyant animation acting with punchy accents.
+
+# 감정 -> 기본 Rig2D 클립 매핑 (개별 대사에 clip을 지정하면 그것이 우선)
+emotionClips:
+  neutral: talk
+  happy: praise
+  excited: cheer
+  teasing: signatureA
+  gentle: talk
+  urgent: warn
+  proud: signatureB
+  shocked: shock
+  pout: pout
+  countdown: count
+  finale: finish
+
+# 반응형 카드 배치 및 시선 추적 설정
+cardBehavior:
+  offsetFromRocket: [-0.36, 0.14, -0.12]
+  widthMeters: 0.34
+  heightMeters: 0.44
+  lookAtPlayerStrength: 0.85
+  trackRocketGaze: true
+  bobAmplitude: 0.008
+  bobHz: 0.42

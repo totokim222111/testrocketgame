@@ -1,0 +1,55 @@
+<header>
+  <div class="head">
+    <span class="brand" aria-hidden="true"></span>
+    <h1>리그 스튜디오</h1>
+    <small id="status" role="status">원화 불러오는 중</small>
+  </div>
+</header>
+<main>
+  <section class="panel">
+    <div class="strip">
+      <select id="coach" aria-label="미리볼 코치"></select>
+      <button id="track" aria-pressed="false">마우스 추적 꺼짐</button>
+    </div>
+    <div id="stage">
+      <div id="viewport">
+        <canvas id="portrait" aria-label="실시간 초상"></canvas>
+        <div class="guides"></div>
+      </div>
+      <div class="nameplate">
+        <span id="coachName"></span>
+        <span id="meter" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span>
+      </div>
+      <button id="light" aria-pressed="false">밝은 배경</button>
+      <p id="speech" hidden></p>
+    </div>
+    <div class="section">
+      <h2>모션 <output id="motionStatus" aria-live="polite">대기</output></h2>
+      <div id="motions" class="motions"></div>
+    </div>
+  </section>
+  <section class="panel inspector" aria-label="리그 편집">
+    <div class="tabs">
+      <button id="facesTab" aria-pressed="true">표정</button
+      ><button id="slidersTab" aria-pressed="false">파라미터</button>
+    </div>
+    <div id="faces"></div>
+    <div id="sliders" hidden></div>
+    <form id="lineForm" class="lips">
+      <label for="line">립싱크 미리보기</label>
+      <div class="speak-form">
+        <input id="line" maxlength="160" value="정확해. 이대로 가." autocomplete="off" /><button>말하기</button>
+      </div>
+    </form>
+    <div class="audio-input">
+      <button id="pickAudio" type="button">음성 파일 열기</button>
+      <input type="file" id="audioFile" accept="audio/*" hidden />
+      <audio id="audioPreview" controls hidden></audio>
+      <label><input type="checkbox" id="useVolume" /> 음량 테스트</label>
+      <input id="volume" aria-label="테스트 음량" type="range" min="0" max="1" step=".01" value="0" disabled />
+    </div>
+    <div class="switches">
+      <button id="idle" aria-pressed="true">자동 아이들</button><button id="reset">초기화</button>
+    </div>
+  </section>
+</main>

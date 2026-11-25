@@ -1,0 +1,129 @@
+version: 1
+id: orbital-repair-15m
+displayName: "소형 로켓 8단계 정밀 수리 및 발사"
+targetDurationMinutes: 15
+
+# 각 단계의 mechanicType과 params는 엔진의 모듈식 퍼즐 컨트롤러와 연결됩니다.
+# 이벤트 ID(startEvent, hintEvent, completeEvent)는 heroine의 dialogue.yaml과 매칭됩니다.
+steps:
+  - id: step_01_hatch
+    order: 1
+    title: "전면 정비 해치 잠금핀 해제"
+    shortLabel: "01 해치 개방"
+    instruction: "앞쪽 해치 잠금핀 3개를 눈금에 맞춰 돌려 해치를 여세요."
+    mountId: front_hatch
+    mechanicType: fastener_unlock
+    startEvent: "step:step_01_hatch:start"
+    hintEvent: "step:step_01_hatch:hint"
+    params:
+      boltCount: 3
+      targetTurnsDeg: 180
+      toleranceDeg: 18
+
+  - id: step_02_gyro
+    order: 2
+    title: "자이로 방위 링 미세 정렬"
+    shortLabel: "02 자이로 정렬"
+    instruction: "로켓을 오른쪽으로 돌려 자이로 링을 0.0° 중심 눈금에 맞추세요."
+    mountId: gyro_ring
+    mechanicType: vernier_ring
+    startEvent: "step:step_02_gyro:start"
+    hintEvent: "step:step_02_gyro:hint"
+    params:
+      initialOffsetDeg: 64
+      targetDeg: 0
+      toleranceDeg: 3.2
+      holdLockSec: 0.45
+
+  - id: step_03_valves
+    order: 3
+    title: "후면 극저온 밸브 압력 균형"
+    shortLabel: "03 밸브 균형"
+    instruction: "뒤쪽 밸브 3개를 조율해 압력 바 3개를 모두 안전 구역에 맞추세요."
+    mountId: cryo_valves
+    mechanicType: coupled_valves
+    startEvent: "step:step_03_valves:start"
+    hintEvent: "step:step_03_valves:hint"
+    params:
+      # 3개의 밸브(0..1)가 3개의 압력 게이지에 연동되는 행렬 (해답이 명확히 존재하도록 설계)
+      initialValves: [0.22, 0.85, 0.18]
+      solutionValves: [0.68, 0.36, 0.74]
+      couplingMatrix:
+        - [0.72, 0.28, 0.00]
+        - [0.20, 0.65, 0.25]
+        - [0.00, 0.22, 0.78]
+      safeBandHalfWidth: 0.085
+
+  - id: step_04_harness
+    order: 4
+    title: "좌측 추진 제어 버스 점퍼 연결"
+    shortLabel: "04 배선 연결"
+    instruction: "왼쪽 측면의 끊어진 점퍼 4가닥을 회로선 표식에 맞춰 연결하세요."
+    mountId: wire_bus
+    mechanicType: wire_patch
+    startEvent: "step:step_04_harness:start"
+    hintEvent: "step:step_04_harness:hint"
+    params:
+      wires:
+        - { id: pwr, label: "PWR", color: "#e8a832", targetSocket: "S1" }
+        - { id: clk, label: "CLK", color: "#36d9b8", targetSocket: "S2" }
+        - { id: ign, label: "IGN", color: "#ef5948", targetSocket: "S4", note: "그을린 S3 우회 -> S4 보조 단자" }
+        - { id: tlm, label: "TLM", color: "#8c7aff", targetSocket: "S3" }
+
+  - id: step_05_seam
+    order: 5
+    title: "외피 열차폐 미세 균열 실링"
+    shortLabel: "05 균열 실링"
+    instruction: "로켓을 천천히 돌리며 빛나는 균열선을 따라 끝까지 실링하세요."
+    mountId: thermal_seam
+    mechanicType: seam_weld
+    startEvent: "step:step_05_seam:start"
+    hintEvent: "step:step_05_seam:hint"
+    params:
+      checkpointCount: 10
+      startAngleDeg: 35
+      endAngleDeg: 170
+      waveAmplitudeCm: 0.85
+
+  - id: step_06_resonance
+    order: 6
+    title: "점화 공진 주파수 3축 동조"
+    shortLabel: "06 주파수 동조"
+    instruction: "뒤쪽 오른편의 3축 슬라이더로 실시간 파형을 기준 곡선에 일치시키세요."
+    mountId: rf_sliders
+    mechanicType: wave_sliders
+    startEvent: "step:step_06_resonance:start"
+    hintEvent: "step:step_06_resonance:hint"
+    params:
+      initialSliders: [0.22, 0.78, 0.16]
+      targetSliders: [0.74, 0.42, 0.66]
+      labels: ["AMP", "FREQ", "PHASE"]
+      tolerance: 0.065
+
+  - id: step_07_nozzle
+    order: 7
+    title: "하단 추력 노즐 센터링 & 점화 플러그"
+    shortLabel: "07 노즐 정비"
+    instruction: "로켓 바닥을 보도록 기울여 노즐 중심을 맞추고 점화 플러그를 체결하세요."
+    mountId: nozzle_gimbal
+    mechanicType: nozzle_trim
+    startEvent: "step:step_07_nozzle:start"
+    hintEvent: "step:step_07_nozzle:hint"
+    params:
+      initialOffset: [0.68, -0.54]
+      toleranceRadius: 0.12
+      requireIgniterInsert: true
+
+  - id: step_08_arm_launch
+    order: 8
+    title: "노즈콘 봉인 & 발사 시퀀스 점화"
+    shortLabel: "08 봉인·발사"
+    instruction: "상단 노즈콘 링을 시계 방향으로 90° 잠그고 발사 스위치를 눌러 발사하세요!"
+    mountId: nosecone_collar
+    mechanicType: nosecone_arm
+    startEvent: "step:step_08_arm_launch:start"
+    hintEvent: "step:step_08_arm_launch:hint"
+    params:
+      requiredTwistDeg: 90
+      toleranceDeg: 8
+      requireSafetyGuard: true

@@ -1,0 +1,253 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "testrocket:heroine",
+  "title": "TESTROCKET heroine",
+  "type": "object",
+  "properties": {
+    "version": {
+      "const": 1
+    },
+    "id": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]*$"
+    },
+    "displayName": {
+      "type": "string",
+      "minLength": 1
+    },
+    "englishName": {
+      "type": "string",
+      "minLength": 1
+    },
+    "role": {
+      "type": "string",
+      "minLength": 1
+    },
+    "tagline": {
+      "type": "string",
+      "minLength": 1
+    },
+    "rig": {
+      "type": "object",
+      "properties": {
+        "rigJson": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^(?!/)(?!.*(?:^|/)\\.{1,2}(?:/|$))[a-zA-Z0-9_./-]+$"
+        },
+        "atlas": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^(?!/)(?!.*(?:^|/)\\.{1,2}(?:/|$))[a-zA-Z0-9_./-]+$"
+        },
+        "framing": {
+          "type": "object",
+          "properties": {
+            "scale": {
+              "type": "number",
+              "exclusiveMinimum": 0
+            },
+            "y": {
+              "type": "number"
+            },
+            "vignette": {
+              "type": "boolean"
+            },
+            "brightness": {
+              "type": "number",
+              "exclusiveMinimum": 0
+            }
+          },
+          "required": [
+            "scale",
+            "y",
+            "vignette",
+            "brightness"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "rigJson",
+        "atlas",
+        "framing"
+      ],
+      "additionalProperties": false
+    },
+    "theme": {
+      "type": "object",
+      "properties": {
+        "accent": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^#[0-9a-fA-F]{6}$"
+        },
+        "accentSoft": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^#[0-9a-fA-F]{6}$"
+        },
+        "secondary": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^#[0-9a-fA-F]{6}$"
+        },
+        "cardBg": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^#[0-9a-fA-F]{6}$"
+        },
+        "cardBorder": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^#[0-9a-fA-F]{6}$"
+        },
+        "textPrimary": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^#[0-9a-fA-F]{6}$"
+        },
+        "textMuted": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^#[0-9a-fA-F]{6}$"
+        }
+      },
+      "required": [
+        "accent",
+        "accentSoft",
+        "secondary",
+        "cardBg",
+        "cardBorder",
+        "textPrimary",
+        "textMuted"
+      ],
+      "additionalProperties": false
+    },
+    "voice": {
+      "type": "object",
+      "properties": {
+        "engine": {
+          "type": "string",
+          "minLength": 1
+        },
+        "language": {
+          "type": "string",
+          "minLength": 1
+        },
+        "gain": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 4
+        },
+        "lipSyncGain": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "audioDir": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^(?!/)(?!.*(?:^|/)\\.{1,2}(?:/|$))[a-zA-Z0-9_./-]+$"
+        },
+        "defaultExtension": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]*$"
+        },
+        "voiceDesignKo": {
+          "type": "string",
+          "minLength": 1
+        },
+        "h3ProfileEn": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "engine",
+        "language",
+        "gain",
+        "lipSyncGain",
+        "audioDir",
+        "defaultExtension"
+      ],
+      "additionalProperties": false
+    },
+    "emotionClips": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "modeLabels": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "cardBehavior": {
+      "type": "object",
+      "properties": {
+        "offsetFromRocket": {
+          "type": "array",
+          "items": {
+            "type": "number"
+          },
+          "minItems": 3,
+          "maxItems": 3
+        },
+        "widthMeters": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "heightMeters": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "lookAtPlayerStrength": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "trackRocketGaze": {
+          "type": "boolean"
+        },
+        "bobAmplitude": {
+          "type": "number",
+          "minimum": 0
+        },
+        "bobHz": {
+          "type": "number",
+          "minimum": 0
+        }
+      },
+      "required": [
+        "offsetFromRocket",
+        "widthMeters",
+        "heightMeters",
+        "lookAtPlayerStrength",
+        "trackRocketGaze",
+        "bobAmplitude",
+        "bobHz"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "required": [
+    "version",
+    "id",
+    "displayName",
+    "englishName",
+    "role",
+    "tagline",
+    "rig",
+    "theme",
+    "voice",
+    "emotionClips",
+    "cardBehavior"
+  ],
+  "additionalProperties": false
+}

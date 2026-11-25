@@ -1,0 +1,175 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "testrocket:events",
+  "title": "TESTROCKET events",
+  "type": "object",
+  "properties": {
+    "version": {
+      "const": 1
+    },
+    "heroineId": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]*$"
+    },
+    "globalCooldownSec": {
+      "type": "number",
+      "minimum": 0
+    },
+    "inspectionZones": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]*$"
+          },
+          "yawMinDeg": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 360
+          },
+          "yawMaxDeg": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 360
+          },
+          "pitchMinDeg": {
+            "type": "number",
+            "minimum": -90,
+            "maximum": 90
+          },
+          "pitchMaxDeg": {
+            "type": "number",
+            "minimum": -90,
+            "maximum": 90
+          },
+          "dwellSec": {
+            "type": "number",
+            "exclusiveMinimum": 0
+          },
+          "emitEvent": {
+            "type": "string",
+            "minLength": 1
+          },
+          "oncePerStep": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "id",
+          "dwellSec",
+          "emitEvent",
+          "oncePerStep"
+        ],
+        "additionalProperties": false
+      },
+      "minItems": 0
+    },
+    "kinematicTriggers": {
+      "type": "object",
+      "properties": {
+        "fastSpinAngularSpeedDegPerSec": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "fastSpinDurationSec": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "fastSpinEvent": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "fastSpinAngularSpeedDegPerSec",
+        "fastSpinDurationSec",
+        "fastSpinEvent"
+      ],
+      "additionalProperties": false
+    },
+    "idleTriggers": {
+      "type": "object",
+      "properties": {
+        "nudgeAfterSec": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "repeatEverySec": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "emitEvent": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "nudgeAfterSec",
+        "repeatEverySec",
+        "emitEvent"
+      ],
+      "additionalProperties": false
+    },
+    "easterEggs": {
+      "type": "object",
+      "properties": {
+        "mistakeStreakForGemple38": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "gemple38Event": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "mistakeStreakForGemple38",
+        "gemple38Event"
+      ],
+      "additionalProperties": false
+    },
+    "milestoneEvents": {
+      "type": "object",
+      "properties": {
+        "halfwayStepIndex": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "halfwayEvent": {
+          "type": "string",
+          "minLength": 1
+        },
+        "almostDoneStepIndex": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "almostDoneEvent": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "halfwayStepIndex",
+        "halfwayEvent",
+        "almostDoneStepIndex",
+        "almostDoneEvent"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "required": [
+    "version",
+    "heroineId",
+    "globalCooldownSec",
+    "inspectionZones",
+    "kinematicTriggers",
+    "idleTriggers",
+    "easterEggs",
+    "milestoneEvents"
+  ],
+  "additionalProperties": false
+}

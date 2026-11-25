@@ -1,0 +1,97 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "testrocket:dialogue",
+  "title": "TESTROCKET dialogue",
+  "type": "object",
+  "properties": {
+    "version": {
+      "const": 1
+    },
+    "heroineId": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]*$"
+    },
+    "language": {
+      "type": "string",
+      "minLength": 1
+    },
+    "lines": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]*$"
+          },
+          "event": {
+            "type": "string",
+            "minLength": 1
+          },
+          "text": {
+            "type": "string",
+            "minLength": 1
+          },
+          "emotion": {
+            "type": "string",
+            "minLength": 1
+          },
+          "clip": {
+            "type": "string",
+            "minLength": 1
+          },
+          "pace": {
+            "enum": [
+              "fast",
+              "normal",
+              "slow"
+            ]
+          },
+          "maxSec": {
+            "type": "number",
+            "exclusiveMinimum": 0
+          },
+          "priority": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "cooldownSec": {
+            "type": "number",
+            "minimum": 0
+          },
+          "audio": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "^(?!/)(?!.*(?:^|/)\\.{1,2}(?:/|$))[a-zA-Z0-9_./-]+$"
+          },
+          "mode": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]*$"
+          }
+        },
+        "required": [
+          "id",
+          "event",
+          "text",
+          "emotion",
+          "pace",
+          "maxSec",
+          "priority",
+          "cooldownSec"
+        ],
+        "additionalProperties": false
+      },
+      "minItems": 1
+    }
+  },
+  "required": [
+    "version",
+    "heroineId",
+    "language",
+    "lines"
+  ],
+  "additionalProperties": false
+}

@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#111c29" />
+    <title>TESTROCKET</title>
+  </head>
+  <body>
+    <main id="game">
+      <div id="viewport" aria-label="3D 정비 격납고"></div>
+      <section id="entry" aria-labelledby="game-title">
+        <div class="entry-content">
+          <div class="entry-rule"></div>
+          <p id="entry-subtitle" class="entry-subtitle"></p>
+          <h1 id="game-title">TESTROCKET</h1>
+          <p id="entry-description"></p>
+          <dl id="entry-specs" class="entry-specs"></dl>
+          <div class="entry-actions">
+            <button type="button" id="play-desktop" disabled>데스크톱 시작 <span aria-hidden="true">↗</span></button>
+            <button type="button" id="play-xr" disabled>헤드셋으로 시작</button>
+          </div>
+          <p id="entry-status" role="status">격납고를 준비하고 있습니다…</p>
+        </div>
+      </section>
+      <div id="hud" hidden>
+        <section class="progress" aria-label="수리 진행 상황">
+          <div class="progress-history">
+            <span id="mission-label"></span>
+            <span id="step-count"></span>
+          </div>
+          <ol id="step-strip"></ol>
+          <h2 id="step-title"></h2>
+          <p id="step-instructions"></p>
+        </section>
+        <div id="flight" role="status" hidden></div>
+        <div class="toolbar">
+          <div class="camera-help">
+            <span><kbd>드래그</kbd> 회전·조작</span>
+            <span><kbd>휠</kbd> 거리</span>
+          </div>
+          <div class="toolbar-actions">
+            <button type="button" id="hint"><kbd>H</kbd> 힌트</button>
+            <button type="button" id="magnify"><kbd>Z</kbd> <span id="magnifier-status"></span></button>
+            <button type="button" id="reset"><kbd>R</kbd> 각도 초기화</button>
+            <button type="button" id="mute" aria-pressed="false"><kbd>M</kbd> <span>소리</span></button>
+          </div>
+        </div>
+        <button type="button" id="resume-xr" class="vr-corner" hidden>VR 입장</button>
+        <div class="subtitles" aria-live="polite" id="subtitles" hidden></div>
+      </div>
+      <section id="ending" aria-labelledby="ending-title" hidden>
+        <div class="ending-content">
+          <p id="ending-mission"></p>
+          <h2 id="ending-title">임무 완료</h2>
+          <p id="ending-time"></p>
+          <div class="entry-actions">
+            <button type="button" id="replay">다시 시작 <span aria-hidden="true">↗</span></button>
+            <button type="button" id="inspect">자유 점검</button>
+          </div>
+        </div>
+      </section>
+    </main>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>

@@ -1,0 +1,19 @@
+version: 1
+title: "TESTROCKET · 소형 로켓 정밀 수리 VR"
+subtitle: "15cm 원형 로켓 360° 정밀 조율 및 우주 발사 퍼즐"
+defaultLanguage: ko
+
+# 다른 AI나 제작자가 이 3개 ID만 바꾸거나 하위 YAML을 교체하면
+# 엔진 코드 수정 없이 히로인·로켓 하우징·미션을 통째로 교체할 수 있습니다.
+active:
+  heroine: gemhwang
+  housing: mk1-column
+  mission: orbital-repair-15m
+
+paths:
+  heroinesDir: content/heroines
+  housingsDir: content/housings
+  missionsDir: content/missions
+
+# URL 쿼리 오버라이드 허용 (?heroine=claude&housing=mk2-gold&mission=custom)
+allowQueryOverride: true

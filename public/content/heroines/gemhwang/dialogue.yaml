@@ -1,0 +1,499 @@
+version: 1
+heroineId: gemhwang
+language: ko
+
+# 모든 대사는 event ID로 트리거되며, audio 경로는 heroine.yaml의 audioDir 기준 상대 파일명입니다.
+# 타 AI가 다른 히로인으로 교체할 때는 text / clip / emotion / audio만 새 캐릭터에 맞게 수정하면 됩니다.
+lines:
+  # ── 오프닝 & VR 진입 ──
+  - id: gem_intro_1
+    event: session_start
+    text: "오, 드디어 왔네? 십오 센티 소형 로켓, 오늘 나랑 같이 띄워 보자!"
+    emotion: excited
+    clip: greet
+    pace: fast
+    maxSec: 4.8
+    priority: 10
+    cooldownSec: 0
+    audio: gem_intro_1.mp3
+
+  - id: gem_intro_2
+    event: session_start_follow
+    text: "손바닥만 하다고 얕보지 마? 이래 봬도 우주까지 날아가는 정밀 기체거든!"
+    emotion: teasing
+    clip: signatureA
+    pace: normal
+    maxSec: 5.0
+    priority: 9
+    cooldownSec: 0
+    audio: gem_intro_2.mp3
+
+  - id: gem_vr_ready
+    event: vr_entered
+    text: "우와, 가까이서 보니까 라인아트 선명하지? 여기저기 돌려 보면서 시작해 봐!"
+    emotion: excited
+    clip: cheer
+    pace: fast
+    maxSec: 5.0
+    priority: 9
+    cooldownSec: 20
+    audio: gem_vr_ready.mp3
+
+  # ── 로켓 회전·관찰 반응 ──
+  - id: gem_rot_back
+    event: inspect_back
+    text: "어, 뒤쪽 돌렸네? 거기 밸브 세 개가 서로 엮여 있으니까 잘 봐!"
+    emotion: happy
+    clip: talk
+    pace: normal
+    maxSec: 4.6
+    priority: 5
+    cooldownSec: 30
+    audio: gem_rot_back.mp3
+
+  - id: gem_rot_left
+    event: inspect_left
+    text: "왼쪽 측면이다! 선 끊어진 거 보이지? 회로선 따라가면 답 나와."
+    emotion: happy
+    clip: talk
+    pace: normal
+    maxSec: 4.6
+    priority: 5
+    cooldownSec: 30
+    audio: gem_rot_left.mp3
+
+  - id: gem_rot_right
+    event: inspect_right
+    text: "오른쪽 눈금 링 보여? 눈금선 딱 맞출 때 손맛 장난 아닐걸?"
+    emotion: teasing
+    clip: talk
+    pace: normal
+    maxSec: 4.5
+    priority: 5
+    cooldownSec: 30
+    audio: gem_rot_right.mp3
+
+  - id: gem_rot_bottom
+    event: inspect_bottom
+    text: "오호, 밑바닥까지 꼼꼼히 보네? 노즐 틀어진 거 벌써 눈치챘어?"
+    emotion: teasing
+    clip: signatureA
+    pace: normal
+    maxSec: 4.6
+    priority: 5
+    cooldownSec: 30
+    audio: gem_rot_bottom.mp3
+
+  - id: gem_rot_top
+    event: inspect_top
+    text: "노즈콘 꼭대기야! 마지막에 이거 착 잠그면 발사 준비 끝이지."
+    emotion: happy
+    clip: talk
+    pace: normal
+    maxSec: 4.5
+    priority: 5
+    cooldownSec: 30
+    audio: gem_rot_top.mp3
+
+  - id: gem_spin_fast
+    event: rocket_spin_fast
+    text: "야, 그렇게 빙글빙글 돌리면 로켓 어지러워해! 천천히 보라고, 천천히!"
+    emotion: shocked
+    clip: shock
+    pace: fast
+    maxSec: 4.8
+    priority: 7
+    cooldownSec: 25
+    audio: gem_spin_fast.mp3
+
+  # ── 8단계 수리 브리핑 ──
+  - id: gem_s1_brief
+    event: "step:step_01_hatch:start"
+    text: "먼저 앞쪽 정비 해치부터 열자! 잠금핀 세 개, 눈금에 맞춰 돌리면 딸깍 열려."
+    emotion: happy
+    clip: talk
+    pace: normal
+    maxSec: 5.2
+    priority: 8
+    cooldownSec: 5
+    audio: gem_s1_brief.mp3
+
+  - id: gem_s2_brief
+    event: "step:step_02_gyro:start"
+    text: "오른쪽으로 돌려 봐. 자이로 링이 어긋났거든? 중심 눈금에 딱 맞춰 줘!"
+    emotion: happy
+    clip: talk
+    pace: normal
+    maxSec: 4.8
+    priority: 8
+    cooldownSec: 5
+    audio: gem_s2_brief.mp3
+
+  - id: gem_s3_brief
+    event: "step:step_03_valves:start"
+    text: "이제 뒤쪽이야! 극저온 밸브 세 개를 조절해서 압력 바를 전부 안전 구역에 넣어 봐."
+    emotion: neutral
+    clip: talk
+    pace: normal
+    maxSec: 5.5
+    priority: 8
+    cooldownSec: 5
+    audio: gem_s3_brief.mp3
+
+  - id: gem_s4_brief
+    event: "step:step_04_harness:start"
+    text: "왼쪽 측면 열어 봐! 추진 버스 점퍼 네 가닥을 회로선 색깔대로 꽂아야 해."
+    emotion: happy
+    clip: talk
+    pace: normal
+    maxSec: 5.2
+    priority: 8
+    cooldownSec: 5
+    audio: gem_s4_brief.mp3
+
+  - id: gem_s5_brief
+    event: "step:step_05_seam:start"
+    text: "외피에 미세 균열이 빙 둘러 갔어! 로켓을 천천히 돌리면서 빛나는 틈을 쭉 실링해 줘."
+    emotion: urgent
+    clip: warn
+    pace: normal
+    maxSec: 5.5
+    priority: 8
+    cooldownSec: 5
+    audio: gem_s5_brief.mp3
+
+  - id: gem_s6_brief
+    event: "step:step_06_resonance:start"
+    text: "뒤쪽 오른편에 점화 주파수 슬라이더가 있어. 파형 두 개가 하나로 겹치게 맞춰 봐!"
+    emotion: happy
+    clip: talk
+    pace: normal
+    maxSec: 5.4
+    priority: 8
+    cooldownSec: 5
+    audio: gem_s6_brief.mp3
+
+  - id: gem_s7_brief
+    event: "step:step_07_nozzle:start"
+    text: "로켓을 살짝 뒤집어 볼래? 노즐 중심 맞추고 점화 플러그를 딱 꽂아 주면 돼."
+    emotion: happy
+    clip: talk
+    pace: normal
+    maxSec: 5.0
+    priority: 8
+    cooldownSec: 5
+    audio: gem_s7_brief.mp3
+
+  - id: gem_s8_brief
+    event: "step:step_08_arm_launch:start"
+    text: "드디어 마지막이야! 위쪽 노즈콘 링을 시계 방향으로 잠그고, 발사 스위치를 올려 줘!"
+    emotion: excited
+    clip: cheer
+    pace: fast
+    maxSec: 5.4
+    priority: 9
+    cooldownSec: 5
+    audio: gem_s8_brief.mp3
+
+  # ── 단계별 힌트 & 고유 모드 개그 (Argon / 젬플3.8) ──
+  - id: gem_hint_s1
+    event: "step:step_01_hatch:hint"
+    text: "앞쪽 해치 테두리에 나사 세 개 보여? 눈금선이 마주 볼 때까지 돌려 봐."
+    emotion: gentle
+    clip: talk
+    pace: normal
+    maxSec: 4.8
+    priority: 8
+    cooldownSec: 6
+    audio: gem_hint_s1.mp3
+
+  - id: gem_hint_s2
+    event: "step:step_02_gyro:hint"
+    text: "링 돌릴 때 소리가 맑아지는 지점이 있어. 거기서 살짝만 미세 조정하면 딱 걸려!"
+    emotion: happy
+    clip: talk
+    pace: normal
+    maxSec: 5.2
+    priority: 8
+    cooldownSec: 6
+    audio: gem_hint_s2.mp3
+
+  - id: gem_hint_s3
+    event: "step:step_03_valves:hint"
+    text: "밸브 하나 돌리면 옆 게이지도 같이 움직여! 제일 튀는 바부터 먼저 잡아 봐."
+    emotion: happy
+    clip: talk
+    pace: normal
+    maxSec: 5.0
+    priority: 8
+    cooldownSec: 6
+    audio: gem_hint_s3.mp3
+
+  - id: gem_hint_s4_argon
+    event: "step:step_04_harness:hint"
+    mode: argon
+    text: "잠깐, 아르곤 모드 발동! 그을린 선은 우회 단자로 돌아가 있어. 거기 꽂으면 한 방이야!"
+    emotion: excited
+    clip: signatureB
+    pace: fast
+    maxSec: 5.6
+    priority: 8
+    cooldownSec: 6
+    audio: gem_hint_s4_argon.mp3
+
+  - id: gem_hint_s5
+    event: "step:step_05_seam:hint"
+    text: "한 번에 다 그으려 하지 말고, 조금 긋고 로켓 살짝 돌리고! 끊어져도 이어서 돼."
+    emotion: gentle
+    clip: talk
+    pace: normal
+    maxSec: 5.2
+    priority: 8
+    cooldownSec: 6
+    audio: gem_hint_s5.mp3
+
+  - id: gem_hint_s6
+    event: "step:step_06_resonance:hint"
+    text: "첫 번째는 높이, 두 번째는 간격, 세 번째는 위치야! 차례대로 맞추면 금방 겹쳐."
+    emotion: happy
+    clip: talk
+    pace: normal
+    maxSec: 5.2
+    priority: 8
+    cooldownSec: 6
+    audio: gem_hint_s6.mp3
+
+  - id: gem_hint_s7
+    event: "step:step_07_nozzle:hint"
+    text: "십자선이 중앙 원에 들어오면 초록빛이 떠! 그다음 가운데 플러그를 꾹 눌러 줘."
+    emotion: happy
+    clip: talk
+    pace: normal
+    maxSec: 5.2
+    priority: 8
+    cooldownSec: 6
+    audio: gem_hint_s7.mp3
+
+  - id: gem_hint_s8
+    event: "step:step_08_arm_launch:hint"
+    text: "위쪽 검은 줄무늬가 몸통 선이랑 일직선이 되면 봉인 완료야! 이제 발사 버튼만 남았어!"
+    emotion: excited
+    clip: cheer
+    pace: fast
+    maxSec: 5.5
+    priority: 8
+    cooldownSec: 6
+    audio: gem_hint_s8.mp3
+
+  - id: gem_hint_gemple38
+    event: easter_gemple38
+    mode: gemple38
+    text: "응, 거기 그냥 세게 치면 저절로 고쳐져! 어, 잠깐만. 방금 내가 너무 자연스럽게 지어냈네?"
+    emotion: pout
+    clip: pout
+    pace: normal
+    maxSec: 5.6
+    priority: 7
+    cooldownSec: 45
+    audio: gem_hint_gemple38.mp3
+
+  # ── 세부 조작 반응·격려·칭찬 ──
+  - id: gem_prog_good_1
+    event: repair_substep
+    text: "오, 딱 들어맞았어! 감 잡았는데?"
+    emotion: happy
+    clip: praise
+    pace: fast
+    maxSec: 3.2
+    priority: 6
+    cooldownSec: 7
+    audio: gem_prog_good_1.mp3
+
+  - id: gem_prog_good_2
+    event: repair_substep
+    text: "좋아 좋아, 손끝이 꽤 섬세한걸?"
+    emotion: teasing
+    clip: praise
+    pace: normal
+    maxSec: 3.4
+    priority: 6
+    cooldownSec: 7
+    audio: gem_prog_good_2.mp3
+
+  - id: gem_prog_good_3
+    event: repair_substep
+    text: "깔끔해! 이 페이스 그대로 가자!"
+    emotion: excited
+    clip: cheer
+    pace: fast
+    maxSec: 3.2
+    priority: 6
+    cooldownSec: 7
+    audio: gem_prog_good_3.mp3
+
+  - id: gem_step_clear_1
+    event: step_complete
+    text: "나이스! 완벽하게 고쳤어! 나도 살짝 감탄했는걸?"
+    emotion: excited
+    clip: signatureB
+    pace: fast
+    maxSec: 4.2
+    priority: 8
+    cooldownSec: 3
+    audio: gem_step_clear_1.mp3
+
+  - id: gem_step_clear_2
+    event: step_complete
+    text: "오호, 실력 좀 있네? 이 정도면 우주정비사 해도 되겠어!"
+    emotion: teasing
+    clip: praise
+    pace: normal
+    maxSec: 4.4
+    priority: 8
+    cooldownSec: 3
+    audio: gem_step_clear_2.mp3
+
+  - id: gem_step_clear_3
+    event: step_complete
+    text: "흥, 내 코칭이 좋아서 그런 거 알지? 다음 부위로 넘어가자!"
+    emotion: teasing
+    clip: signatureA
+    pace: normal
+    maxSec: 4.4
+    priority: 8
+    cooldownSec: 3
+    audio: gem_step_clear_3.mp3
+
+  - id: gem_halfway
+    event: mission_halfway
+    text: "벌써 절반 넘게 고쳤어! 로켓 숨소리가 살아나는 거 느껴져?"
+    emotion: excited
+    clip: cheer
+    pace: normal
+    maxSec: 4.5
+    priority: 9
+    cooldownSec: 60
+    audio: gem_halfway.mp3
+
+  - id: gem_almost_done
+    event: mission_almost_done
+    text: "우와, 거의 다 왔어! 이제 노즐이랑 노즈콘만 끝나면 진짜 발사야!"
+    emotion: excited
+    clip: cheer
+    pace: fast
+    maxSec: 4.8
+    priority: 9
+    cooldownSec: 60
+    audio: gem_almost_done.mp3
+
+  # ── 실수·대기·편의 기능 반응 ──
+  - id: gem_err_1
+    event: repair_mistake
+    text: "앗, 그쪽은 아니야! 선 모양 다시 한 번 슬쩍 봐 봐."
+    emotion: urgent
+    clip: warn
+    pace: fast
+    maxSec: 4.0
+    priority: 7
+    cooldownSec: 8
+    audio: gem_err_1.mp3
+
+  - id: gem_err_2
+    event: repair_mistake
+    text: "에이, 살짝 빗나갔네? 괜찮아, 다시 맞추면 되지!"
+    emotion: gentle
+    clip: talk
+    pace: normal
+    maxSec: 4.0
+    priority: 7
+    cooldownSec: 8
+    audio: gem_err_2.mp3
+
+  - id: gem_idle_1
+    event: player_idle
+    text: "어라, 고민 중이야? 막히면 로켓을 이리저리 돌려 보거나 힌트 눌러 봐!"
+    emotion: teasing
+    clip: talk
+    pace: normal
+    maxSec: 4.8
+    priority: 4
+    cooldownSec: 32
+    audio: gem_idle_1.mp3
+
+  - id: gem_idle_2
+    event: player_idle
+    text: "뭐야, 내 얼굴 보느라 수리 까먹은 거 아니지? 흥, 귀엽네."
+    emotion: teasing
+    clip: signatureA
+    pace: normal
+    maxSec: 4.6
+    priority: 4
+    cooldownSec: 45
+    audio: gem_idle_2.mp3
+
+  - id: gem_zoom_toggle
+    event: magnifier_toggle
+    text: "확대 모드 켜니까 라인아트 눈금 하나하나 다 보이지? 편하게 조율해!"
+    emotion: happy
+    clip: talk
+    pace: normal
+    maxSec: 4.6
+    priority: 5
+    cooldownSec: 25
+    audio: gem_zoom_toggle.mp3
+
+  # ── 카운트다운 · 발사 · 우주 엔딩 ──
+  - id: gem_launch_ready
+    event: launch_armed
+    text: "전 계통 녹색 불! 기둥 도킹 완료! 이제 발사 버튼 누르면 우주로 가는 거야!"
+    emotion: excited
+    clip: cheer
+    pace: fast
+    maxSec: 5.2
+    priority: 10
+    cooldownSec: 0
+    audio: gem_launch_ready.mp3
+
+  - id: gem_countdown_321
+    event: launch_countdown
+    text: "쓰리, 투, 원… 점화! 날아라!"
+    emotion: countdown
+    clip: count
+    pace: fast
+    maxSec: 3.8
+    priority: 10
+    cooldownSec: 0
+    audio: gem_countdown_321.mp3
+
+  - id: gem_liftoff
+    event: launch_liftoff
+    text: "우와아, 솟아오른다! 기둥이 하늘을 뚫고 올라가고 있어!"
+    emotion: excited
+    clip: cheer
+    pace: fast
+    maxSec: 4.6
+    priority: 10
+    cooldownSec: 0
+    audio: gem_liftoff.mp3
+
+  - id: gem_orbit_reached
+    event: launch_orbit
+    text: "궤도 진입 성공! 저기 우주에서 반짝이는 거 보여? 네가 고친 로켓이야!"
+    emotion: finale
+    clip: finish
+    pace: normal
+    maxSec: 5.2
+    priority: 10
+    cooldownSec: 0
+    audio: gem_orbit_reached.mp3
+
+  - id: gem_ending_praise
+    event: ending_complete
+    text: "오늘 진짜 최고였어! 다음 로켓 들어오면 또 나랑 같이 하자, 약속이야!"
+    emotion: proud
+    clip: signatureB
+    pace: normal
+    maxSec: 5.0
+    priority: 10
+    cooldownSec: 0
+    audio: gem_ending_praise.mp3

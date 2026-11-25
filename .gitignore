@@ -1,0 +1,16 @@
+# Dependencies & Build
+node_modules/
+dist/
+.local/
+*.log
+
+# Editor & OS
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Codex scratch / temp
+.codex-briefs/
+*.tmp
+*.part

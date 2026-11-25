@@ -1,0 +1,68 @@
+version: 1
+heroineId: gemhwang
+
+# 대화창 반응 이벤트 라우팅 규칙
+# 게임 시뮬레이션이 발생시키는 원시 신호를 대사 이벤트 ID와 Rig2D 반응으로 연결합니다.
+globalCooldownSec: 2.2
+
+inspectionZones:
+  - id: back_view
+    yawMinDeg: 140
+    yawMaxDeg: 220
+    pitchMinDeg: -35
+    pitchMaxDeg: 35
+    dwellSec: 0.7
+    emitEvent: inspect_back
+    oncePerStep: true
+
+  - id: right_view
+    yawMinDeg: 55
+    yawMaxDeg: 125
+    pitchMinDeg: -35
+    pitchMaxDeg: 35
+    dwellSec: 0.7
+    emitEvent: inspect_right
+    oncePerStep: true
+
+  - id: left_view
+    yawMinDeg: 235
+    yawMaxDeg: 305
+    pitchMinDeg: -35
+    pitchMaxDeg: 35
+    dwellSec: 0.7
+    emitEvent: inspect_left
+    oncePerStep: true
+
+  - id: bottom_view
+    pitchMinDeg: -90
+    pitchMaxDeg: -48
+    dwellSec: 0.65
+    emitEvent: inspect_bottom
+    oncePerStep: true
+
+  - id: top_view
+    pitchMinDeg: 48
+    pitchMaxDeg: 90
+    dwellSec: 0.65
+    emitEvent: inspect_top
+    oncePerStep: true
+
+kinematicTriggers:
+  fastSpinAngularSpeedDegPerSec: 290
+  fastSpinDurationSec: 0.55
+  fastSpinEvent: rocket_spin_fast
+
+idleTriggers:
+  nudgeAfterSec: 24
+  repeatEverySec: 34
+  emitEvent: player_idle
+
+easterEggs:
+  mistakeStreakForGemple38: 3
+  gemple38Event: easter_gemple38
+
+milestoneEvents:
+  halfwayStepIndex: 4
+  halfwayEvent: mission_halfway
+  almostDoneStepIndex: 6
+  almostDoneEvent: mission_almost_done

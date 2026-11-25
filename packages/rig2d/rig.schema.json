@@ -1,0 +1,950 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Rig2D v1",
+  "type": "object",
+  "properties": {
+    "version": {
+      "const": 1
+    },
+    "canvas": {
+      "type": "array",
+      "prefixItems": [
+        {
+          "type": "integer",
+          "minimum": 1
+        },
+        {
+          "type": "integer",
+          "minimum": 1
+        }
+      ],
+      "minItems": 2,
+      "maxItems": 2
+    },
+    "size": {
+      "type": "array",
+      "prefixItems": [
+        {
+          "type": "integer",
+          "minimum": 1
+        },
+        {
+          "type": "integer",
+          "minimum": 1
+        }
+      ],
+      "minItems": 2,
+      "maxItems": 2
+    },
+    "atlas": {
+      "type": "string",
+      "minLength": 1
+    },
+    "continuous": {
+      "type": "boolean"
+    },
+    "handRect": {
+      "$ref": "#/$defs/rect"
+    },
+    "armFrames": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["rect", "elbow"],
+        "properties": {
+          "rect": { "$ref": "#/$defs/rect" },
+          "elbow": { "type": "array", "items": { "type": "number" }, "minItems": 2, "maxItems": 2 }
+        },
+        "additionalProperties": false
+      }
+    },
+    "bustFade": {
+      "type": "array",
+      "minItems": 2,
+      "maxItems": 2,
+      "items": { "type": "number", "minimum": 0 }
+    },
+    "layers": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/layer"
+      },
+      "minItems": 1
+    },
+    "animation": {
+      "$ref": "#/$defs/animation"
+    }
+  },
+  "required": [
+    "version",
+    "canvas",
+    "size",
+    "atlas",
+    "layers"
+  ],
+  "additionalProperties": false,
+  "$defs": {
+    "rect": {
+      "type": "array",
+      "prefixItems": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "number"
+        },
+        {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        {
+          "type": "number",
+          "exclusiveMinimum": 0
+        }
+      ],
+      "minItems": 4,
+      "maxItems": 4
+    },
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "yaw": {
+          "title": "고개 좌우",
+          "type": "number",
+          "minimum": -15,
+          "maximum": 15,
+          "default": 0
+        },
+        "pitch": {
+          "title": "고개 상하",
+          "type": "number",
+          "minimum": -15,
+          "maximum": 15,
+          "default": 0
+        },
+        "roll": {
+          "title": "갸웃",
+          "type": "number",
+          "minimum": -15,
+          "maximum": 15,
+          "default": 0
+        },
+        "lean": {
+          "title": "몸 기울기",
+          "type": "number",
+          "minimum": -1,
+          "maximum": 1,
+          "default": 0
+        },
+        "forward": {
+          "title": "몸 앞뒤",
+          "type": "number",
+          "minimum": -1,
+          "maximum": 1,
+          "default": 0
+        },
+        "breath": {
+          "title": "호흡",
+          "type": "number",
+          "minimum": -1,
+          "maximum": 1,
+          "default": 0
+        },
+        "bounce": {
+          "title": "몸 높이",
+          "type": "number",
+          "minimum": -1,
+          "maximum": 1,
+          "default": 0
+        },
+        "eye": {
+          "title": "눈 뜸",
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1.4,
+          "default": 1
+        },
+        "happy": {
+          "title": "웃는 눈",
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1,
+          "default": 0
+        },
+        "gazeX": {
+          "title": "시선 좌우",
+          "type": "number",
+          "minimum": -1,
+          "maximum": 1,
+          "default": 0
+        },
+        "gazeY": {
+          "title": "시선 상하",
+          "type": "number",
+          "minimum": -1,
+          "maximum": 1,
+          "default": 0
+        },
+        "brow": {
+          "title": "눈썹",
+          "type": "number",
+          "minimum": 0,
+          "maximum": 3,
+          "default": 0
+        },
+        "mouth": {
+          "title": "입 모양",
+          "type": "number",
+          "minimum": 0,
+          "maximum": 5,
+          "default": 0
+        },
+        "cheek": {
+          "title": "볼 부풀림",
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1,
+          "default": 0
+        },
+        "blush": {
+          "title": "홍조",
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1,
+          "default": 0
+        },
+        "fringe": {
+          "title": "앞머리",
+          "type": "number",
+          "minimum": -1,
+          "maximum": 1,
+          "default": 0
+        },
+        "locks": {
+          "title": "옆머리",
+          "type": "number",
+          "minimum": -1,
+          "maximum": 1,
+          "default": 0
+        },
+        "rear": {
+          "title": "뒷머리",
+          "type": "number",
+          "minimum": -1,
+          "maximum": 1,
+          "default": 0
+        },
+        "wave": {
+          "title": "손 높이",
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1,
+          "default": 0
+        },
+        "gesture": {
+          "title": "손 모양",
+          "type": "number",
+          "minimum": 0,
+          "maximum": 3,
+          "default": 0
+        },
+        "wrist": {
+          "title": "손 흔들기",
+          "type": "number",
+          "minimum": -1,
+          "maximum": 1,
+          "default": 0
+        },
+        "wink": {
+          "title": "한쪽 눈 감기",
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1,
+          "default": 0
+        },
+        "shrug": {
+          "title": "어깨 올림",
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1,
+          "default": 0
+        },
+        "specialLip": {
+          "title": "고유 입 모양",
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1,
+          "default": 0
+        },
+        "specialHand": {
+          "title": "고유 손동작",
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1,
+          "default": 0
+        },
+        "sparkle": {
+          "title": "반짝임",
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1,
+          "default": 0
+        }
+      },
+      "required": [],
+      "additionalProperties": false
+    },
+    "layer": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "enum": [
+            "rear",
+            "neck",
+            "body",
+            "face",
+            "blush",
+            "eyeL",
+            "eyeR",
+            "brows",
+            "mouth",
+            "fringe",
+            "locks",
+            "hand",
+            "spark"
+          ]
+        },
+        "rect": {
+          "$ref": "#/$defs/rect"
+        },
+        "grid": {
+          "type": "array",
+          "prefixItems": [
+            {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 256
+            },
+            {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 256
+            }
+          ],
+          "minItems": 2,
+          "maxItems": 2
+        },
+        "depth": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 255
+          }
+        },
+        "tile": {
+          "type": "array",
+          "prefixItems": [
+            {
+              "type": "integer",
+              "minimum": 0
+            },
+            {
+              "type": "integer",
+              "minimum": 0
+            },
+            {
+              "type": "integer",
+              "minimum": 1
+            },
+            {
+              "type": "integer",
+              "minimum": 1
+            }
+          ],
+          "minItems": 4,
+          "maxItems": 4
+        },
+        "frames": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "stride": {
+          "type": "integer",
+          "minimum": 1
+        }
+      },
+      "required": [
+        "name",
+        "rect",
+        "grid",
+        "depth",
+        "tile",
+        "frames",
+        "stride"
+      ],
+      "additionalProperties": false
+    },
+    "clip": {
+      "type": "object",
+      "properties": {
+        "label": {
+          "type": "string"
+        },
+        "duration": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "constants": {
+          "$ref": "#/$defs/parameters"
+        },
+        "tracks": {
+          "type": "object",
+          "properties": {
+            "yaw": {
+              "type": "array",
+              "items": {
+                "type": "array",
+                "prefixItems": [
+                  {
+                    "type": "number",
+                    "minimum": 0
+                  },
+                  {
+                    "$ref": "#/$defs/parameters/properties/yaw"
+                  }
+                ],
+                "minItems": 2,
+                "maxItems": 2
+              }
+            },
+            "pitch": {
+              "type": "array",
+              "items": {
+                "type": "array",
+                "prefixItems": [
+                  {
+                    "type": "number",
+                    "minimum": 0
+                  },
+                  {
+                    "$ref": "#/$defs/parameters/properties/pitch"
+                  }
+                ],
+                "minItems": 2,
+                "maxItems": 2
+              }
+            },
+            "roll": {
+              "type": "array",
+              "items": {
+                "type": "array",
+                "prefixItems": [
+                  {
+                    "type": "number",
+                    "minimum": 0
+                  },
+                  {
+                    "$ref": "#/$defs/parameters/properties/roll"
+                  }
+                ],
+                "minItems": 2,
+                "maxItems": 2
+              }
+            },
+            "lean": {
+              "type": "array",
+              "items": {
+                "type": "array",
+                "prefixItems": [
+                  {
+                    "type": "number",
+                    "minimum": 0
+                  },
+                  {
+                    "$ref": "#/$defs/parameters/properties/lean"
+                  }
+                ],
+                "minItems": 2,
+                "maxItems": 2
+              }
+            },
+            "forward": {
+              "type": "array",
+              "items": {
+                "type": "array",
+                "prefixItems": [
+                  {
+                    "type": "number",
+                    "minimum": 0
+                  },
+                  {
+                    "$ref": "#/$defs/parameters/properties/forward"
+                  }
+                ],
+                "minItems": 2,
+                "maxItems": 2
+              }
+            },
+            "breath": {
+              "type": "array",
+              "items": {
+                "type": "array",
+                "prefixItems": [
+                  {
+                    "type": "number",
+                    "minimum": 0
+                  },
+                  {
+                    "$ref": "#/$defs/parameters/properties/breath"
+                  }
+                ],
+                "minItems": 2,
+                "maxItems": 2
+              }
+            },
+            "bounce": {
+              "type": "array",
+              "items": {
+                "type": "array",
+                "prefixItems": [
+                  {
+                    "type": "number",
+                    "minimum": 0
+                  },
+                  {
+                    "$ref": "#/$defs/parameters/properties/bounce"
+                  }
+                ],
+                "minItems": 2,
+                "maxItems": 2
+              }
+            },
+            "eye": {
+              "type": "array",
+              "items": {
+                "type": "array",
+                "prefixItems": [
+                  {
+                    "type": "number",
+                    "minimum": 0
+                  },
+                  {
+                    "$ref": "#/$defs/parameters/properties/eye"
+                  }
+                ],
+                "minItems": 2,
+                "maxItems": 2
+              }
+            },
+            "happy": {
+              "type": "array",
+              "items": {
+                "type": "array",
+                "prefixItems": [
+                  {
+                    "type": "number",
+                    "minimum": 0
+                  },
+                  {
+                    "$ref": "#/$defs/parameters/properties/happy"
+                  }
+                ],
+                "minItems": 2,
+                "maxItems": 2
+              }
+            },
+            "gazeX": {
+              "type": "array",
+              "items": {
+                "type": "array",
+                "prefixItems": [
+                  {
+                    "type": "number",
+                    "minimum": 0
+                  },
+                  {
+                    "$ref": "#/$defs/parameters/properties/gazeX"
+                  }
+                ],
+                "minItems": 2,
+                "maxItems": 2
+              }
+            },
+            "gazeY": {
+              "type": "array",
+              "items": {
+                "type": "array",
+                "prefixItems": [
+                  {
+                    "type": "number",
+                    "minimum": 0
+                  },
+                  {
+                    "$ref": "#/$defs/parameters/properties/gazeY"
+                  }
+                ],
+                "minItems": 2,
+                "maxItems": 2
+              }
+            },
+            "brow": {
+              "type": "array",
+              "items": {
+                "type": "array",
+                "prefixItems": [
+                  {
+                    "type": "number",
+                    "minimum": 0
+                  },
+                  {
+                    "$ref": "#/$defs/parameters/properties/brow"
+                  }
+                ],
+                "minItems": 2,
+                "maxItems": 2
+              }
+            },
+            "mouth": {
+              "type": "array",
+              "items": {
+                "type": "array",
+                "prefixItems": [
+                  {
+                    "type": "number",
+                    "minimum": 0
+                  },
+                  {
+                    "$ref": "#/$defs/parameters/properties/mouth"
+                  }
+                ],
+                "minItems": 2,
+                "maxItems": 2
+              }
+            },
+            "cheek": {
+              "type": "array",
+              "items": {
+                "type": "array",
+                "prefixItems": [
+                  {
+                    "type": "number",
+                    "minimum": 0
+                  },
+                  {
+                    "$ref": "#/$defs/parameters/properties/cheek"
+                  }
+                ],
+                "minItems": 2,
+                "maxItems": 2
+              }
+            },
+            "blush": {
+              "type": "array",
+              "items": {
+                "type": "array",
+                "prefixItems": [
+                  {
+                    "type": "number",
+                    "minimum": 0
+                  },
+                  {
+                    "$ref": "#/$defs/parameters/properties/blush"
+                  }
+                ],
+                "minItems": 2,
+                "maxItems": 2
+              }
+            },
+            "fringe": {
+              "type": "array",
+              "items": {
+                "type": "array",
+                "prefixItems": [
+                  {
+                    "type": "number",
+                    "minimum": 0
+                  },
+                  {
+                    "$ref": "#/$defs/parameters/properties/fringe"
+                  }
+                ],
+                "minItems": 2,
+                "maxItems": 2
+              }
+            },
+            "locks": {
+              "type": "array",
+              "items": {
+                "type": "array",
+                "prefixItems": [
+                  {
+                    "type": "number",
+                    "minimum": 0
+                  },
+                  {
+                    "$ref": "#/$defs/parameters/properties/locks"
+                  }
+                ],
+                "minItems": 2,
+                "maxItems": 2
+              }
+            },
+            "rear": {
+              "type": "array",
+              "items": {
+                "type": "array",
+                "prefixItems": [
+                  {
+                    "type": "number",
+                    "minimum": 0
+                  },
+                  {
+                    "$ref": "#/$defs/parameters/properties/rear"
+                  }
+                ],
+                "minItems": 2,
+                "maxItems": 2
+              }
+            },
+            "wave": {
+              "type": "array",
+              "items": {
+                "type": "array",
+                "prefixItems": [
+                  {
+                    "type": "number",
+                    "minimum": 0
+                  },
+                  {
+                    "$ref": "#/$defs/parameters/properties/wave"
+                  }
+                ],
+                "minItems": 2,
+                "maxItems": 2
+              }
+            },
+            "gesture": {
+              "type": "array",
+              "items": {
+                "type": "array",
+                "prefixItems": [
+                  {
+                    "type": "number",
+                    "minimum": 0
+                  },
+                  {
+                    "$ref": "#/$defs/parameters/properties/gesture"
+                  }
+                ],
+                "minItems": 2,
+                "maxItems": 2
+              }
+            },
+            "wrist": {
+              "type": "array",
+              "items": {
+                "type": "array",
+                "prefixItems": [
+                  {
+                    "type": "number",
+                    "minimum": 0
+                  },
+                  {
+                    "$ref": "#/$defs/parameters/properties/wrist"
+                  }
+                ],
+                "minItems": 2,
+                "maxItems": 2
+              }
+            },
+            "wink": {
+              "type": "array",
+              "items": {
+                "type": "array",
+                "prefixItems": [
+                  {
+                    "type": "number",
+                    "minimum": 0
+                  },
+                  {
+                    "$ref": "#/$defs/parameters/properties/wink"
+                  }
+                ],
+                "minItems": 2,
+                "maxItems": 2
+              }
+            },
+            "shrug": {
+              "type": "array",
+              "items": {
+                "type": "array",
+                "prefixItems": [
+                  {
+                    "type": "number",
+                    "minimum": 0
+                  },
+                  {
+                    "$ref": "#/$defs/parameters/properties/shrug"
+                  }
+                ],
+                "minItems": 2,
+                "maxItems": 2
+              }
+            },
+            "specialLip": {
+              "type": "array",
+              "items": {
+                "type": "array",
+                "prefixItems": [
+                  {
+                    "type": "number",
+                    "minimum": 0
+                  },
+                  {
+                    "$ref": "#/$defs/parameters/properties/specialLip"
+                  }
+                ],
+                "minItems": 2,
+                "maxItems": 2
+              }
+            },
+            "specialHand": {
+              "type": "array",
+              "items": {
+                "type": "array",
+                "prefixItems": [
+                  {
+                    "type": "number",
+                    "minimum": 0
+                  },
+                  {
+                    "$ref": "#/$defs/parameters/properties/specialHand"
+                  }
+                ],
+                "minItems": 2,
+                "maxItems": 2
+              }
+            },
+            "sparkle": {
+              "type": "array",
+              "items": {
+                "type": "array",
+                "prefixItems": [
+                  {
+                    "type": "number",
+                    "minimum": 0
+                  },
+                  {
+                    "$ref": "#/$defs/parameters/properties/sparkle"
+                  }
+                ],
+                "minItems": 2,
+                "maxItems": 2
+              }
+            }
+          },
+          "required": [],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "label",
+        "duration",
+        "tracks"
+      ],
+      "additionalProperties": false
+    },
+    "animation": {
+      "type": "object",
+      "properties": {
+        "parameters": {
+          "$ref": "#/$defs/parameters"
+        },
+        "clips": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/$defs/clip"
+          }
+        },
+        "idle": {
+          "type": "object",
+          "properties": {
+            "offsets": {
+              "$ref": "#/$defs/parameters"
+            },
+            "oscillators": {
+              "type": "array",
+              "items": {
+                "type": "array",
+                "prefixItems": [
+                  {
+                    "enum": [
+                      "yaw",
+                      "pitch",
+                      "roll",
+                      "lean",
+                      "forward",
+                      "breath",
+                      "bounce",
+                      "eye",
+                      "happy",
+                      "gazeX",
+                      "gazeY",
+                      "brow",
+                      "mouth",
+                      "cheek",
+                      "blush",
+                      "fringe",
+                      "locks",
+                      "rear",
+                      "wave",
+                      "gesture",
+                      "wrist",
+                      "wink",
+                      "shrug",
+                      "specialLip",
+                      "specialHand",
+                      "sparkle"
+                    ]
+                  },
+                  {
+                    "type": "number"
+                  },
+                  {
+                    "type": "number"
+                  },
+                  {
+                    "type": "number"
+                  }
+                ],
+                "minItems": 4,
+                "maxItems": 4
+              }
+            },
+            "breathHz": {
+              "type": "number",
+              "minimum": 0
+            },
+            "headScale": {
+              "type": "number",
+              "minimum": 0
+            },
+            "nodPeriod": {
+              "type": "number",
+              "minimum": 0
+            },
+            "nodDepth": {
+              "type": "number",
+              "minimum": 0
+            }
+          },
+          "required": [],
+          "additionalProperties": false
+        }
+      },
+      "required": [],
+      "additionalProperties": false
+    }
+  }
+}

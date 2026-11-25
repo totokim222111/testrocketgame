@@ -1,0 +1,215 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "testrocket:environment",
+  "title": "TESTROCKET environment",
+  "type": "object",
+  "properties": {
+    "version": {
+      "const": 1
+    },
+    "id": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]*$"
+    },
+    "housingId": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]*$"
+    },
+    "displayName": {
+      "type": "string",
+      "minLength": 1
+    },
+    "svgLayers": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]*$"
+          },
+          "src": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "^(?!/)(?!.*(?:^|/)\\.{1,2}(?:/|$))[a-zA-Z0-9_./-]+$"
+          },
+          "kind": {
+            "enum": [
+              "cylinder",
+              "dome_cap"
+            ]
+          },
+          "radiusMeters": {
+            "type": "number",
+            "exclusiveMinimum": 0
+          },
+          "heightMeters": {
+            "type": "number",
+            "exclusiveMinimum": 0
+          },
+          "yOffsetMeters": {
+            "type": "number"
+          },
+          "opacity": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          },
+          "driftSpeedRadPerSec": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "id",
+          "src",
+          "kind",
+          "radiusMeters",
+          "yOffsetMeters",
+          "opacity"
+        ],
+        "additionalProperties": false
+      },
+      "minItems": 0
+    },
+    "lighting": {
+      "type": "object",
+      "properties": {
+        "skyTop": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^#[0-9a-fA-F]{6}$"
+        },
+        "skyHorizon": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^#[0-9a-fA-F]{6}$"
+        },
+        "groundBounce": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^#[0-9a-fA-F]{6}$"
+        },
+        "sunColor": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^#[0-9a-fA-F]{6}$"
+        },
+        "rimColor": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^#[0-9a-fA-F]{6}$"
+        },
+        "bayFogColor": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^#[0-9a-fA-F]{6}$"
+        },
+        "sunIntensity": {
+          "type": "number",
+          "minimum": 0
+        },
+        "sunDirection": {
+          "type": "array",
+          "items": {
+            "type": "number"
+          },
+          "minItems": 3,
+          "maxItems": 3
+        },
+        "rimIntensity": {
+          "type": "number",
+          "minimum": 0
+        },
+        "bayFogNear": {
+          "type": "number",
+          "minimum": 0
+        },
+        "bayFogFar": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        }
+      },
+      "required": [
+        "skyTop",
+        "skyHorizon",
+        "groundBounce",
+        "sunColor",
+        "rimColor",
+        "bayFogColor",
+        "sunIntensity",
+        "sunDirection",
+        "rimIntensity",
+        "bayFogNear",
+        "bayFogFar"
+      ],
+      "additionalProperties": false
+    },
+    "launchColumn": {
+      "type": "object",
+      "properties": {
+        "pedestalColor": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^#[0-9a-fA-F]{6}$"
+        },
+        "gantryColor": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^#[0-9a-fA-F]{6}$"
+        },
+        "gantryAccent": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^#[0-9a-fA-F]{6}$"
+        },
+        "beamColor": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^#[0-9a-fA-F]{6}$"
+        },
+        "exhaustCoreColor": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^#[0-9a-fA-F]{6}$"
+        },
+        "exhaustOuterColor": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^#[0-9a-fA-F]{6}$"
+        },
+        "roofIrisOpenSec": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "ascentDurationSec": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        }
+      },
+      "required": [
+        "pedestalColor",
+        "gantryColor",
+        "gantryAccent",
+        "beamColor",
+        "exhaustCoreColor",
+        "exhaustOuterColor",
+        "roofIrisOpenSec",
+        "ascentDurationSec"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "required": [
+    "version",
+    "id",
+    "housingId",
+    "displayName",
+    "svgLayers",
+    "lighting",
+    "launchColumn"
+  ],
+  "additionalProperties": false
+}

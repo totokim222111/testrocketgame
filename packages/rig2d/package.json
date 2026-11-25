@@ -1,0 +1,19 @@
+{
+  "name": "@rig2d/engine",
+  "version": "1.0.0",
+  "type": "module",
+  "exports": {
+    ".": "./src/core.ts",
+    "./three": "./src/three.ts",
+    "./canvas": "./src/canvas.ts",
+    "./rig.schema.json": "./rig.schema.json"
+  },
+  "peerDependencies": {
+    "three": ">=0.187.0 <1"
+  },
+  "peerDependenciesMeta": {
+    "three": {
+      "optional": true
+    }
+  }
+}

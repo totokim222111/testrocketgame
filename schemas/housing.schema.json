@@ -1,0 +1,312 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "testrocket:housing",
+  "title": "TESTROCKET housing",
+  "type": "object",
+  "properties": {
+    "version": {
+      "const": 1
+    },
+    "id": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]*$"
+    },
+    "displayName": {
+      "type": "string",
+      "minLength": 1
+    },
+    "serialCode": {
+      "type": "string",
+      "minLength": 1
+    },
+    "description": {
+      "type": "string",
+      "minLength": 1
+    },
+    "dimensions": {
+      "type": "object",
+      "properties": {
+        "lengthCm": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "circumferenceCm": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "noseconeRatio": {
+          "type": "number",
+          "minimum": 0.01,
+          "maximum": 0.95
+        },
+        "bodyRatio": {
+          "type": "number",
+          "minimum": 0.01,
+          "maximum": 0.95
+        },
+        "nozzleRatio": {
+          "type": "number",
+          "minimum": 0.01,
+          "maximum": 0.95
+        },
+        "finCount": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 16
+        },
+        "finSpanCm": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "magnifierScale": {
+          "type": "number",
+          "minimum": 1,
+          "maximum": 8
+        }
+      },
+      "required": [
+        "lengthCm",
+        "circumferenceCm",
+        "noseconeRatio",
+        "bodyRatio",
+        "nozzleRatio",
+        "finCount",
+        "finSpanCm",
+        "magnifierScale"
+      ],
+      "additionalProperties": false
+    },
+    "palette": {
+      "type": "object",
+      "properties": {
+        "hullBase": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^#[0-9a-fA-F]{6}$"
+        },
+        "hullShade": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^#[0-9a-fA-F]{6}$"
+        },
+        "hullDark": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^#[0-9a-fA-F]{6}$"
+        },
+        "inkLine": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^#[0-9a-fA-F]{6}$"
+        },
+        "accentPrimary": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^#[0-9a-fA-F]{6}$"
+        },
+        "accentSecondary": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^#[0-9a-fA-F]{6}$"
+        },
+        "accentHazard": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^#[0-9a-fA-F]{6}$"
+        },
+        "metalTrim": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^#[0-9a-fA-F]{6}$"
+        },
+        "nozzleInner": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^#[0-9a-fA-F]{6}$"
+        },
+        "glowActive": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^#[0-9a-fA-F]{6}$"
+        },
+        "glowWarning": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^#[0-9a-fA-F]{6}$"
+        },
+        "rimLight": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^#[0-9a-fA-F]{6}$"
+        }
+      },
+      "required": [
+        "hullBase",
+        "hullShade",
+        "hullDark",
+        "inkLine",
+        "accentPrimary",
+        "accentSecondary",
+        "accentHazard",
+        "metalTrim",
+        "nozzleInner",
+        "glowActive",
+        "glowWarning",
+        "rimLight"
+      ],
+      "additionalProperties": false
+    },
+    "lineArtTexture": {
+      "type": "object",
+      "properties": {
+        "resolution": {
+          "enum": [
+            512,
+            1024,
+            2048,
+            4096
+          ]
+        },
+        "azimuthTickStepDeg": {
+          "type": "number",
+          "minimum": 1,
+          "maximum": 360
+        },
+        "azimuthMajorStepDeg": {
+          "type": "number",
+          "minimum": 1,
+          "maximum": 360
+        },
+        "axialRulerTicksMm": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "panelRings": {
+          "type": "array",
+          "items": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          },
+          "minItems": 0
+        },
+        "longitudinalSeamsDeg": {
+          "type": "array",
+          "items": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 360
+          },
+          "minItems": 0
+        },
+        "rivetSpacingDeg": {
+          "type": "number",
+          "minimum": 1,
+          "maximum": 360
+        },
+        "showBlueprintGrid": {
+          "type": "boolean"
+        },
+        "showHazardCollar": {
+          "type": "boolean"
+        },
+        "showCircuitTraces": {
+          "type": "boolean"
+        },
+        "stencilLabels": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "angleDeg": {
+                "type": "number"
+              },
+              "heightRatio": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+              },
+              "text": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "required": [
+              "angleDeg",
+              "heightRatio",
+              "text"
+            ],
+            "additionalProperties": false
+          },
+          "minItems": 0
+        }
+      },
+      "required": [
+        "resolution",
+        "azimuthTickStepDeg",
+        "azimuthMajorStepDeg",
+        "axialRulerTicksMm",
+        "panelRings",
+        "longitudinalSeamsDeg",
+        "rivetSpacingDeg",
+        "showBlueprintGrid",
+        "showHazardCollar",
+        "showCircuitTraces",
+        "stencilLabels"
+      ],
+      "additionalProperties": false
+    },
+    "mounts": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "properties": {
+          "angleDeg": {
+            "type": "number"
+          },
+          "heightRatio": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          },
+          "spanDeg": {
+            "type": "number",
+            "minimum": -360,
+            "maximum": 360
+          },
+          "zone": {
+            "enum": [
+              "front",
+              "right",
+              "back",
+              "left",
+              "lower_ring",
+              "rear_right",
+              "bottom",
+              "top"
+            ]
+          }
+        },
+        "required": [
+          "angleDeg",
+          "heightRatio",
+          "zone"
+        ],
+        "additionalProperties": false
+      }
+    }
+  },
+  "required": [
+    "version",
+    "id",
+    "displayName",
+    "serialCode",
+    "description",
+    "dimensions",
+    "palette",
+    "lineArtTexture",
+    "mounts"
+  ],
+  "additionalProperties": false
+}

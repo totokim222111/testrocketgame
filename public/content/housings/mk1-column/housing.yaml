@@ -1,0 +1,89 @@
+version: 1
+id: mk1-column
+displayName: "MK-I 오비탈 칼럼 15"
+serialCode: "ORB-15C-MK1"
+description: "길이 15cm, 둘레 13cm의 초소형 정밀 원형 로켓 하우징"
+
+# 실측 물리 치수 (WebXR 실물 스케일 기준)
+dimensions:
+  lengthCm: 15.0
+  circumferenceCm: 13.0
+  # radiusCm = 13.0 / (2 * PI) ≈ 2.069 cm (지름 약 4.14 cm)
+  noseconeRatio: 0.24
+  bodyRatio: 0.60
+  nozzleRatio: 0.16
+  finCount: 4
+  finSpanCm: 1.55
+  magnifierScale: 2.25
+
+# 카툰 셰이딩 + 금속 라인아트 팔레트 (다른 하우징으로 교체 시 색감만 바꿔도 즉시 적용)
+palette:
+  hullBase: "#f4f1ea"
+  hullShade: "#d7d2c6"
+  hullDark: "#24314a"
+  inkLine: "#1a253b"
+  accentPrimary: "#28b899"
+  accentSecondary: "#e09a2b"
+  accentHazard: "#de4b3d"
+  metalTrim: "#4a5974"
+  nozzleInner: "#1b202d"
+  glowActive: "#44ffd1"
+  glowWarning: "#ff6b4a"
+  rimLight: "#c8f2ff"
+
+# 원통 UV 절차적 라인아트 텍스처 설정 (2048x2048 고해상도 캔버스 생성)
+lineArtTexture:
+  resolution: 2048
+  azimuthTickStepDeg: 15
+  azimuthMajorStepDeg: 45
+  axialRulerTicksMm: 10
+  panelRings: [0.22, 0.42, 0.62, 0.78]
+  longitudinalSeamsDeg: [0, 90, 180, 270]
+  rivetSpacingDeg: 12
+  showBlueprintGrid: true
+  showHazardCollar: true
+  showCircuitTraces: true
+  stencilLabels:
+    - { angleDeg: 0, heightRatio: 0.74, text: "SEC-01 HATCH" }
+    - { angleDeg: 90, heightRatio: 0.74, text: "SEC-02 GYRO" }
+    - { angleDeg: 180, heightRatio: 0.56, text: "SEC-03 CRYO" }
+    - { angleDeg: 270, heightRatio: 0.70, text: "SEC-04 BUS" }
+    - { angleDeg: 45, heightRatio: 0.28, text: "THERMAL SEAM" }
+    - { angleDeg: 135, heightRatio: 0.68, text: "RF-TUNER" }
+
+# 로켓 원통 표면 위 8개 수리 스테이션의 장착 좌표
+# 다른 하우징은 이 좌표만 변경해 부품 위치를 자유롭게 재배치할 수 있습니다.
+mounts:
+  front_hatch:
+    angleDeg: 0
+    heightRatio: 0.58
+    zone: front
+  gyro_ring:
+    angleDeg: 90
+    heightRatio: 0.68
+    zone: right
+  cryo_valves:
+    angleDeg: 180
+    heightRatio: 0.44
+    zone: back
+  wire_bus:
+    angleDeg: 270
+    heightRatio: 0.56
+    zone: left
+  thermal_seam:
+    angleDeg: 35
+    heightRatio: 0.34
+    spanDeg: 135
+    zone: lower_ring
+  rf_sliders:
+    angleDeg: 135
+    heightRatio: 0.54
+    zone: rear_right
+  nozzle_gimbal:
+    angleDeg: 0
+    heightRatio: 0.05
+    zone: bottom
+  nosecone_collar:
+    angleDeg: 0
+    heightRatio: 0.84
+    zone: top

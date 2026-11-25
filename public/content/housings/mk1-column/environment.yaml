@@ -1,0 +1,54 @@
+version: 1
+id: orbital-hangar-bay
+housingId: mk1-column
+displayName: "선라이트 궤도 정비 격납고"
+
+# Codex 생성 이미지 -> SVG 벡터 트레이싱 배경 레이어
+# 타 AI는 backgrounds/ 아래 SVG만 교체해도 VR 전역 배경을 선명하게 바꿀 수 있습니다.
+svgLayers:
+  - id: sky_panorama
+    src: backgrounds/launch-bay-vista.svg
+    kind: cylinder
+    radiusMeters: 28
+    heightMeters: 24
+    yOffsetMeters: 5.2
+    opacity: 1.0
+  - id: cloud_ring
+    src: backgrounds/cloud-horizon.svg
+    kind: cylinder
+    radiusMeters: 22
+    heightMeters: 10
+    yOffsetMeters: 2.4
+    opacity: 0.92
+    driftSpeedRadPerSec: 0.004
+  - id: star_zenith
+    src: backgrounds/cosmos-dome.svg
+    kind: dome_cap
+    radiusMeters: 30
+    yOffsetMeters: 10.5
+    opacity: 0.95
+
+# 로우폴리 카툰 월드 조명 및 색감
+lighting:
+  skyTop: "#13294b"
+  skyHorizon: "#89c2e8"
+  groundBounce: "#31425a"
+  sunColor: "#fff4dc"
+  sunIntensity: 1.9
+  sunDirection: [6, 12, 5]
+  rimColor: "#6be5ff"
+  rimIntensity: 0.95
+  bayFogColor: "#8ec5e6"
+  bayFogNear: 18
+  bayFogFar: 46
+
+# 발사 기둥(Launch Column) 및 엔딩 연출 색감
+launchColumn:
+  pedestalColor: "#2e3d56"
+  gantryColor: "#e6edf5"
+  gantryAccent: "#e09a2b"
+  beamColor: "#5ef2d6"
+  exhaustCoreColor: "#fff5cc"
+  exhaustOuterColor: "#ff7a3d"
+  roofIrisOpenSec: 2.2
+  ascentDurationSec: 11.5

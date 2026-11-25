@@ -1,0 +1,786 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "testrocket:mission",
+  "title": "TESTROCKET mission",
+  "type": "object",
+  "properties": {
+    "version": {
+      "const": 1
+    },
+    "id": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]*$"
+    },
+    "displayName": {
+      "type": "string",
+      "minLength": 1
+    },
+    "targetDurationMinutes": {
+      "type": "number",
+      "exclusiveMinimum": 0
+    },
+    "steps": {
+      "type": "array",
+      "items": {
+        "oneOf": [
+          {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "minLength": 1,
+                "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]*$"
+              },
+              "order": {
+                "type": "integer",
+                "minimum": 1
+              },
+              "title": {
+                "type": "string",
+                "minLength": 1
+              },
+              "shortLabel": {
+                "type": "string",
+                "minLength": 1
+              },
+              "instruction": {
+                "type": "string",
+                "minLength": 1
+              },
+              "mountId": {
+                "type": "string",
+                "minLength": 1,
+                "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]*$"
+              },
+              "mechanicType": {
+                "const": "fastener_unlock"
+              },
+              "startEvent": {
+                "type": "string",
+                "minLength": 1
+              },
+              "hintEvent": {
+                "type": "string",
+                "minLength": 1
+              },
+              "completeEvent": {
+                "type": "string",
+                "minLength": 1
+              },
+              "params": {
+                "type": "object",
+                "properties": {
+                  "boltCount": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 8
+                  },
+                  "targetTurnsDeg": {
+                    "type": "number",
+                    "exclusiveMinimum": 0
+                  },
+                  "toleranceDeg": {
+                    "type": "number",
+                    "exclusiveMinimum": 0
+                  }
+                },
+                "required": [
+                  "boltCount",
+                  "targetTurnsDeg",
+                  "toleranceDeg"
+                ],
+                "additionalProperties": false
+              }
+            },
+            "required": [
+              "id",
+              "order",
+              "title",
+              "shortLabel",
+              "instruction",
+              "mountId",
+              "mechanicType",
+              "startEvent",
+              "hintEvent",
+              "params"
+            ],
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "minLength": 1,
+                "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]*$"
+              },
+              "order": {
+                "type": "integer",
+                "minimum": 1
+              },
+              "title": {
+                "type": "string",
+                "minLength": 1
+              },
+              "shortLabel": {
+                "type": "string",
+                "minLength": 1
+              },
+              "instruction": {
+                "type": "string",
+                "minLength": 1
+              },
+              "mountId": {
+                "type": "string",
+                "minLength": 1,
+                "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]*$"
+              },
+              "mechanicType": {
+                "const": "vernier_ring"
+              },
+              "startEvent": {
+                "type": "string",
+                "minLength": 1
+              },
+              "hintEvent": {
+                "type": "string",
+                "minLength": 1
+              },
+              "completeEvent": {
+                "type": "string",
+                "minLength": 1
+              },
+              "params": {
+                "type": "object",
+                "properties": {
+                  "initialOffsetDeg": {
+                    "type": "number"
+                  },
+                  "targetDeg": {
+                    "type": "number"
+                  },
+                  "toleranceDeg": {
+                    "type": "number",
+                    "minimum": 0.01,
+                    "maximum": 180
+                  },
+                  "holdLockSec": {
+                    "type": "number",
+                    "exclusiveMinimum": 0
+                  }
+                },
+                "required": [
+                  "initialOffsetDeg",
+                  "targetDeg",
+                  "toleranceDeg",
+                  "holdLockSec"
+                ],
+                "additionalProperties": false
+              }
+            },
+            "required": [
+              "id",
+              "order",
+              "title",
+              "shortLabel",
+              "instruction",
+              "mountId",
+              "mechanicType",
+              "startEvent",
+              "hintEvent",
+              "params"
+            ],
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "minLength": 1,
+                "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]*$"
+              },
+              "order": {
+                "type": "integer",
+                "minimum": 1
+              },
+              "title": {
+                "type": "string",
+                "minLength": 1
+              },
+              "shortLabel": {
+                "type": "string",
+                "minLength": 1
+              },
+              "instruction": {
+                "type": "string",
+                "minLength": 1
+              },
+              "mountId": {
+                "type": "string",
+                "minLength": 1,
+                "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]*$"
+              },
+              "mechanicType": {
+                "const": "coupled_valves"
+              },
+              "startEvent": {
+                "type": "string",
+                "minLength": 1
+              },
+              "hintEvent": {
+                "type": "string",
+                "minLength": 1
+              },
+              "completeEvent": {
+                "type": "string",
+                "minLength": 1
+              },
+              "params": {
+                "type": "object",
+                "properties": {
+                  "initialValves": {
+                    "type": "array",
+                    "items": {
+                      "type": "number",
+                      "minimum": 0,
+                      "maximum": 1
+                    },
+                    "minItems": 3,
+                    "maxItems": 3
+                  },
+                  "solutionValves": {
+                    "type": "array",
+                    "items": {
+                      "type": "number",
+                      "minimum": 0,
+                      "maximum": 1
+                    },
+                    "minItems": 3,
+                    "maxItems": 3
+                  },
+                  "couplingMatrix": {
+                    "type": "array",
+                    "items": {
+                      "type": "array",
+                      "items": {
+                        "type": "number",
+                        "minimum": 0
+                      },
+                      "minItems": 3,
+                      "maxItems": 3
+                    },
+                    "minItems": 3,
+                    "maxItems": 3
+                  },
+                  "safeBandHalfWidth": {
+                    "type": "number",
+                    "exclusiveMinimum": 0
+                  }
+                },
+                "required": [
+                  "initialValves",
+                  "solutionValves",
+                  "couplingMatrix",
+                  "safeBandHalfWidth"
+                ],
+                "additionalProperties": false
+              }
+            },
+            "required": [
+              "id",
+              "order",
+              "title",
+              "shortLabel",
+              "instruction",
+              "mountId",
+              "mechanicType",
+              "startEvent",
+              "hintEvent",
+              "params"
+            ],
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "minLength": 1,
+                "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]*$"
+              },
+              "order": {
+                "type": "integer",
+                "minimum": 1
+              },
+              "title": {
+                "type": "string",
+                "minLength": 1
+              },
+              "shortLabel": {
+                "type": "string",
+                "minLength": 1
+              },
+              "instruction": {
+                "type": "string",
+                "minLength": 1
+              },
+              "mountId": {
+                "type": "string",
+                "minLength": 1,
+                "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]*$"
+              },
+              "mechanicType": {
+                "const": "wire_patch"
+              },
+              "startEvent": {
+                "type": "string",
+                "minLength": 1
+              },
+              "hintEvent": {
+                "type": "string",
+                "minLength": 1
+              },
+              "completeEvent": {
+                "type": "string",
+                "minLength": 1
+              },
+              "params": {
+                "type": "object",
+                "properties": {
+                  "wires": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "minLength": 1,
+                          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]*$"
+                        },
+                        "label": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "color": {
+                          "type": "string",
+                          "minLength": 1,
+                          "pattern": "^#[0-9a-fA-F]{6}$"
+                        },
+                        "targetSocket": {
+                          "type": "string",
+                          "minLength": 1,
+                          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]*$"
+                        },
+                        "note": {
+                          "type": "string",
+                          "minLength": 1
+                        }
+                      },
+                      "required": [
+                        "id",
+                        "label",
+                        "color",
+                        "targetSocket"
+                      ],
+                      "additionalProperties": false
+                    },
+                    "minItems": 2,
+                    "maxItems": 8
+                  }
+                },
+                "required": [
+                  "wires"
+                ],
+                "additionalProperties": false
+              }
+            },
+            "required": [
+              "id",
+              "order",
+              "title",
+              "shortLabel",
+              "instruction",
+              "mountId",
+              "mechanicType",
+              "startEvent",
+              "hintEvent",
+              "params"
+            ],
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "minLength": 1,
+                "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]*$"
+              },
+              "order": {
+                "type": "integer",
+                "minimum": 1
+              },
+              "title": {
+                "type": "string",
+                "minLength": 1
+              },
+              "shortLabel": {
+                "type": "string",
+                "minLength": 1
+              },
+              "instruction": {
+                "type": "string",
+                "minLength": 1
+              },
+              "mountId": {
+                "type": "string",
+                "minLength": 1,
+                "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]*$"
+              },
+              "mechanicType": {
+                "const": "seam_weld"
+              },
+              "startEvent": {
+                "type": "string",
+                "minLength": 1
+              },
+              "hintEvent": {
+                "type": "string",
+                "minLength": 1
+              },
+              "completeEvent": {
+                "type": "string",
+                "minLength": 1
+              },
+              "params": {
+                "type": "object",
+                "properties": {
+                  "checkpointCount": {
+                    "type": "integer",
+                    "minimum": 2,
+                    "maximum": 40
+                  },
+                  "startAngleDeg": {
+                    "type": "number"
+                  },
+                  "endAngleDeg": {
+                    "type": "number"
+                  },
+                  "waveAmplitudeCm": {
+                    "type": "number",
+                    "minimum": 0
+                  }
+                },
+                "required": [
+                  "checkpointCount",
+                  "startAngleDeg",
+                  "endAngleDeg",
+                  "waveAmplitudeCm"
+                ],
+                "additionalProperties": false
+              }
+            },
+            "required": [
+              "id",
+              "order",
+              "title",
+              "shortLabel",
+              "instruction",
+              "mountId",
+              "mechanicType",
+              "startEvent",
+              "hintEvent",
+              "params"
+            ],
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "minLength": 1,
+                "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]*$"
+              },
+              "order": {
+                "type": "integer",
+                "minimum": 1
+              },
+              "title": {
+                "type": "string",
+                "minLength": 1
+              },
+              "shortLabel": {
+                "type": "string",
+                "minLength": 1
+              },
+              "instruction": {
+                "type": "string",
+                "minLength": 1
+              },
+              "mountId": {
+                "type": "string",
+                "minLength": 1,
+                "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]*$"
+              },
+              "mechanicType": {
+                "const": "wave_sliders"
+              },
+              "startEvent": {
+                "type": "string",
+                "minLength": 1
+              },
+              "hintEvent": {
+                "type": "string",
+                "minLength": 1
+              },
+              "completeEvent": {
+                "type": "string",
+                "minLength": 1
+              },
+              "params": {
+                "type": "object",
+                "properties": {
+                  "initialSliders": {
+                    "type": "array",
+                    "items": {
+                      "type": "number",
+                      "minimum": 0,
+                      "maximum": 1
+                    },
+                    "minItems": 3,
+                    "maxItems": 3
+                  },
+                  "targetSliders": {
+                    "type": "array",
+                    "items": {
+                      "type": "number",
+                      "minimum": 0,
+                      "maximum": 1
+                    },
+                    "minItems": 3,
+                    "maxItems": 3
+                  },
+                  "labels": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "minLength": 1
+                    },
+                    "minItems": 3,
+                    "maxItems": 3
+                  },
+                  "tolerance": {
+                    "type": "number",
+                    "minimum": 0.001,
+                    "maximum": 1
+                  }
+                },
+                "required": [
+                  "initialSliders",
+                  "targetSliders",
+                  "labels",
+                  "tolerance"
+                ],
+                "additionalProperties": false
+              }
+            },
+            "required": [
+              "id",
+              "order",
+              "title",
+              "shortLabel",
+              "instruction",
+              "mountId",
+              "mechanicType",
+              "startEvent",
+              "hintEvent",
+              "params"
+            ],
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "minLength": 1,
+                "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]*$"
+              },
+              "order": {
+                "type": "integer",
+                "minimum": 1
+              },
+              "title": {
+                "type": "string",
+                "minLength": 1
+              },
+              "shortLabel": {
+                "type": "string",
+                "minLength": 1
+              },
+              "instruction": {
+                "type": "string",
+                "minLength": 1
+              },
+              "mountId": {
+                "type": "string",
+                "minLength": 1,
+                "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]*$"
+              },
+              "mechanicType": {
+                "const": "nozzle_trim"
+              },
+              "startEvent": {
+                "type": "string",
+                "minLength": 1
+              },
+              "hintEvent": {
+                "type": "string",
+                "minLength": 1
+              },
+              "completeEvent": {
+                "type": "string",
+                "minLength": 1
+              },
+              "params": {
+                "type": "object",
+                "properties": {
+                  "initialOffset": {
+                    "type": "array",
+                    "items": {
+                      "type": "number",
+                      "minimum": -1,
+                      "maximum": 1
+                    },
+                    "minItems": 2,
+                    "maxItems": 2
+                  },
+                  "toleranceRadius": {
+                    "type": "number",
+                    "minimum": 0.001,
+                    "maximum": 1
+                  },
+                  "requireIgniterInsert": {
+                    "type": "boolean"
+                  }
+                },
+                "required": [
+                  "initialOffset",
+                  "toleranceRadius",
+                  "requireIgniterInsert"
+                ],
+                "additionalProperties": false
+              }
+            },
+            "required": [
+              "id",
+              "order",
+              "title",
+              "shortLabel",
+              "instruction",
+              "mountId",
+              "mechanicType",
+              "startEvent",
+              "hintEvent",
+              "params"
+            ],
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "minLength": 1,
+                "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]*$"
+              },
+              "order": {
+                "type": "integer",
+                "minimum": 1
+              },
+              "title": {
+                "type": "string",
+                "minLength": 1
+              },
+              "shortLabel": {
+                "type": "string",
+                "minLength": 1
+              },
+              "instruction": {
+                "type": "string",
+                "minLength": 1
+              },
+              "mountId": {
+                "type": "string",
+                "minLength": 1,
+                "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]*$"
+              },
+              "mechanicType": {
+                "const": "nosecone_arm"
+              },
+              "startEvent": {
+                "type": "string",
+                "minLength": 1
+              },
+              "hintEvent": {
+                "type": "string",
+                "minLength": 1
+              },
+              "completeEvent": {
+                "type": "string",
+                "minLength": 1
+              },
+              "params": {
+                "type": "object",
+                "properties": {
+                  "requiredTwistDeg": {
+                    "type": "number",
+                    "exclusiveMinimum": 0
+                  },
+                  "toleranceDeg": {
+                    "type": "number",
+                    "exclusiveMinimum": 0
+                  },
+                  "requireSafetyGuard": {
+                    "type": "boolean"
+                  }
+                },
+                "required": [
+                  "requiredTwistDeg",
+                  "toleranceDeg",
+                  "requireSafetyGuard"
+                ],
+                "additionalProperties": false
+              }
+            },
+            "required": [
+              "id",
+              "order",
+              "title",
+              "shortLabel",
+              "instruction",
+              "mountId",
+              "mechanicType",
+              "startEvent",
+              "hintEvent",
+              "params"
+            ],
+            "additionalProperties": false
+          }
+        ]
+      },
+      "minItems": 1
+    }
+  },
+  "required": [
+    "version",
+    "id",
+    "displayName",
+    "targetDurationMinutes",
+    "steps"
+  ],
+  "additionalProperties": false
+}
